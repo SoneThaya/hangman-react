@@ -13,11 +13,6 @@ const words = ['application', 'programming', 'interface', 'wizard'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-let playable = true;
-
-const correctLetters = [];
-const wrongLetters = [];
-
 function App() {
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
@@ -51,6 +46,16 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeydown);
   }, [correctLetters, wrongLetters, playable])
 
+  function playAgain() {
+    setPlayable(true);
+
+    // empty arrays
+    setCorrectLetters([]); 
+    setWrongLetters([])
+
+    const random = Math.floor(Math.random() * words.length);
+    selectedWord = words[random];
+  }
   
 
   return (
@@ -61,7 +66,7 @@ function App() {
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
-      <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} />
+      <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
       <Notification showNotification={showNotification} />
     </>
   );

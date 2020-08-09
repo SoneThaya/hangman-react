@@ -1,5 +1,4 @@
 import React from 'react'
-import WrongLetters from './WrongLetters'
 
 const Figure = ({ wrongLetters}) => {
   const errors = wrongLetters.length;
